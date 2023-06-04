@@ -2,6 +2,7 @@ package com.example.demo.android.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.demo.data.remote.PokedexRepositoryApi
 import com.example.demo.domain.PokedexRepository
 
 class PokedexViewModelFactory : ViewModelProvider.Factory {

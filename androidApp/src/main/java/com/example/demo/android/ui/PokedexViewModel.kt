@@ -1,11 +1,11 @@
 package com.example.demo.android.ui
 
-import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.demo.data.model.Pokedex
+import com.example.demo.data.remote.PokedexRepositoryApi
 import com.example.demo.domain.PokedexRepository
 import io.ktor.client.call.body
 import kotlinx.coroutines.CoroutineExceptionHandler
