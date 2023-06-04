@@ -1,9 +1,14 @@
 package com.example.demo
 
-import platform.UIKit.UIDevice
+import io.github.aakira.napier.DebugAntilog
+import io.github.aakira.napier.Napier
+
 
 class IOSPlatform: Platform {
-    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
+    override val name: String = "HOLA ME TIRABA ERROR Y PUSE ESTO"
 }
 
 actual fun getPlatform(): Platform = IOSPlatform()
+actual fun initLogger(){
+    Napier.base(DebugAntilog())
+}

@@ -1,8 +1,11 @@
-package com.example.pokedex
+package com.example.demo.android.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.demo.domain.ImageBuilder
+import com.example.demo.data.model.PokedexResults
+import com.example.demo.android.StringFormatter
 import com.example.demo.android.R
 import com.example.demo.android.databinding.ItemPokedexBinding
 import com.squareup.picasso.Picasso

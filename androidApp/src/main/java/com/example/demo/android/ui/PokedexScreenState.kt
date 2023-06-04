@@ -1,4 +1,6 @@
-package com.example.pokedex
+package com.example.demo.android.ui
+
+import com.example.demo.data.model.Pokedex
 
 sealed class PokedexScreenState {
     object Loading : PokedexScreenState()

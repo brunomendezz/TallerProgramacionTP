@@ -1,4 +1,4 @@
-package com.example.pokedex
+package com.example.demo.domain
 
 object ImageBuilder {
 
