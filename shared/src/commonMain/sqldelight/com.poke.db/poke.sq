@@ -1,0 +1,10 @@
+CREATE TABLE Character (
+name TEXT NOT NULL,
+url TEXT NOT NULL
+);
+
+insertCharacter:
+INSERT INTO Character(name,url) VALUES (?,?);
+
+getCharacter:
+SELECT ALL Character.* FROM Character;

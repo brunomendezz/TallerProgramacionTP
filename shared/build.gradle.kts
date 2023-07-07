@@ -2,6 +2,8 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     kotlin("plugin.serialization") version "1.6.10"
+    id("com.squareup.sqldelight")
+
 }
 
 kotlin {
@@ -26,21 +28,25 @@ kotlin {
     sourceSets {
 
         val ktorVersion = "2.0.0-beta-1"
+        val sqlDelightVersion = "1.5.5"
 
 
         val commonMain by getting{
             dependencies{
 
-                //SERIALIZATION
-                implementation("io.ktor:ktor-serialization-kotlinx-json:${ktorVersion}")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-
                 //KTOR
-                implementation("io.ktor:ktor-client-core:${ktorVersion}")
-                implementation("io.ktor:ktor-client-logging:${ktorVersion}")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-logging:$ktorVersion")
 
-                //NAPPIER
+                //NAPIER
                 implementation("io.github.aakira:napier:2.6.1")
+
+                //SERIALIZATION
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+
+                //SQL
+                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
 
 
             }
@@ -53,7 +59,11 @@ kotlin {
         }
         val androidMain by getting{
             dependencies {
+                //KTOR
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+
+                //SQL
+                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
 
             }
         }
@@ -67,7 +77,11 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
             dependencies{
+                //KTOR
                 implementation("io.ktor:ktor-client-ios:$ktorVersion")
+
+                //SQL
+                implementation("com.squareup.sqldelight:native-driver:${sqlDelightVersion}")
             }
         }
         val iosX64Test by getting
@@ -79,6 +93,12 @@ kotlin {
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
         }
+    }
+}
+
+sqldelight{
+    database("AppDatabase"){
+        packageName="com.poke.db"
     }
 }
 
