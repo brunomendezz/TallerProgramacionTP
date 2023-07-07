@@ -5,15 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.demo.data.model.Pokedex
-import com.example.demo.data.remote.PokedexRepositoryApi
-import com.example.demo.domain.PokedexRepository
+import com.example.demo.domain.PokedexServices
 import io.ktor.client.call.body
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class PokedexViewModel(private val pokedexRepository: PokedexRepository) : ViewModel() {
+class PokedexViewModel(private val pokedexRepository: PokedexServices) : ViewModel() {
 
     val pokedex = MutableLiveData<Pokedex>()
 
@@ -30,11 +29,12 @@ class PokedexViewModel(private val pokedexRepository: PokedexRepository) : ViewM
     init {
         viewModelScope.launch(coroutineExceptionHandler) {
             kotlin.runCatching {
-                pokedexRepository.getPokedex()
+                pokedexRepository.getPokedexFromApi()
             }.onSuccess {
                 if (it !=null) {
                     pokedex.postValue(it.body())
                     _screenState.value = PokedexScreenState.ShowPokedex(it.body())
+
                 } else {
                     _screenState.value = PokedexScreenState.Error
                 }

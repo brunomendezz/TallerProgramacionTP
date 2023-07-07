@@ -1,7 +1,11 @@
 package com.example.demo
 
+import android.content.Context
+import com.poke.db.AppDatabase
+import com.squareup.sqldelight.db.SqlDriver
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
+import com.squareup.sqldelight.android.AndroidSqliteDriver
 
 class AndroidPlatform : Platform {
     override val name: String = "Android ${android.os.Build.VERSION.SDK_INT}"
@@ -10,4 +14,9 @@ class AndroidPlatform : Platform {
 actual fun getPlatform(): Platform = AndroidPlatform()
 actual fun initLogger() {
     Napier.base(DebugAntilog())
+}
+actual class DatabaseDriverFactory(private val context : Context){
+    actual fun createDriver():SqlDriver{
+        return AndroidSqliteDriver(AppDatabase.Schema,context,"poke.db")
+    }
 }
